@@ -47,18 +47,19 @@ stages:
           inputs:
             Contents: '**'
             TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/application'
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/app/application.zip'
+
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)\drop\*.zip'
-            ArtifactName: 'drop'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)\app\application.zip'
+            ArtifactName: 'app'
             publishLocation: 'Container'
-        # - task: ArchiveFiles@2
-        #   inputs:
-        #     rootFolderOrFile: '$(Build.BinariesDirectory)'
-        #     includeRootFolder: true
-        #     archiveType: 'zip'
-        #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        #     replaceExistingArchive: true
+
 
 - stage: 'Dev'
   displayName: 'Dev'
@@ -114,4 +115,4 @@ stages:
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
               WebSiteName: 'IIS Web App Deploy'
-              Package: '$(Build.ArtifactStagingDirectory)\drop\*.zip'
+              Package: '$(Build.ArtifactStagingDirectory)\app\application.zip'
