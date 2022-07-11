@@ -111,4 +111,4 @@ stages:
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
               WebSiteName: 'IIS Web App Deploy'
-              Package: '$(System.DefaultWorkingDirectory)/**/aspnet-get-started.zip'
+              Package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
