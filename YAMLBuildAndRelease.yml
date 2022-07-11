@@ -54,7 +54,8 @@ stages:
      displayName: Dev
      environment: 
        name: 'Dev'    
-       resourceType: IIS Deploy
+       resourceType: VirtualMachine
+       resourceName: IISWebServer
      variables:
      - name: websitePhysicalPath
        value: '%SystemDrive%\inetpub\wwwroot'
