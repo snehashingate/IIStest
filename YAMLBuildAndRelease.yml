@@ -76,7 +76,19 @@ stages:
               WebsiteAuthUserName: 'iisadmin'
               WebsiteAuthUserPassword: 'IISadmin@123'
               AddBinding: true
-              Bindings: 'http/All Unassigned:80:'
+              Bindings: |
+                  {
+                      bindings:[
+                          {
+                              "protocol":"http",
+                              "ipAddress":"",
+                              "hostname":"",
+                              "port":"80",
+                              "sslThumbprint":"",
+                              "sniFlag":false
+                          }
+                      ]
+                  }
               # CreateOrUpdateAppPoolForWebsite: true
               # ConfigureAuthenticationForWebsite: true
               # AppPoolNameForWebsite: 'test'
