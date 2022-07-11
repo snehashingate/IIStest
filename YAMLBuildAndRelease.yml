@@ -49,7 +49,7 @@ stages:
             TargetFolder: '$(Build.ArtifactStagingDirectory)'
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)\drop\*.zip'
             ArtifactName: 'drop'
             publishLocation: 'Container'
         # - task: ArchiveFiles@2
@@ -114,4 +114,4 @@ stages:
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
               WebSiteName: 'IIS Web App Deploy'
-              Package: '$(Build.ArtifactStagingDirectory)/drop'
+              Package: '$(Build.ArtifactStagingDirectory)\drop\*.zip'
