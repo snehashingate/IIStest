@@ -98,4 +98,4 @@ stages:
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
               WebSiteName: 'IIS Web App Deploy'
-              Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+              Package: '$(Build.ArtifactStagingDirectory)\**\*.zip'
