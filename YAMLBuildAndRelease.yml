@@ -43,7 +43,10 @@ stages:
         #   inputs:
         #     targetPath: '$(Pipeline.Workspace)'
         #     publishLocation: 'pipeline'
-        
+        - task: CopyFiles@2
+          inputs:
+            Contents: '**'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
         - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
