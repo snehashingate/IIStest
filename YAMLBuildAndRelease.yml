@@ -38,19 +38,24 @@ stages:
           inputs:
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
+
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            publishLocation: 'pipeline'
         
         - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
-        - task: ArchiveFiles@2
-          inputs:
-            rootFolderOrFile: '$(Build.BinariesDirectory)'
-            includeRootFolder: true
-            archiveType: 'zip'
-            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-            replaceExistingArchive: true
+        # - task: ArchiveFiles@2
+        #   inputs:
+        #     rootFolderOrFile: '$(Build.BinariesDirectory)'
+        #     includeRootFolder: true
+        #     archiveType: 'zip'
+        #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        #     replaceExistingArchive: true
 
 - stage: 'Dev'
   displayName: 'Dev'
@@ -71,6 +76,7 @@ stages:
       runOnce:
         deploy:
           steps: 
+
 
           - task: IISWebAppManagementOnMachineGroup@0
             inputs:
