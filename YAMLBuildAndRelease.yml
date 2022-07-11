@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  websiteName: 'Default Web Site'
 
 stages:
 - stage: 'Build'
@@ -44,3 +45,44 @@ stages:
             ArtifactName: 'drop'
             publishLocation: 'Container'
 
+- stage: 'Dev'
+  displayName: 'Dev'
+  dependsOn: 'Build'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+   - deployment: Dev
+     displayName: Dev
+     environment: 
+       name: 'Dev'    
+       resourceType: IIS Deploy
+     variables:
+     - name: websitePhysicalPath
+       value: '%SystemDrive%\inetpub\wwwroot'
+
+     strategy:
+      runOnce:
+        deploy:
+          steps: 
+
+          - task: IISWebAppManagementOnMachineGroup@0
+            inputs:
+              EnableIIS: true
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'CreateOrUpdateWebsite'
+              WebsiteName: 'Default Web Site'
+              WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+              WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
+              WebsiteAuthUserName: 'iisadmin'
+              WebsiteAuthUserPassword: 'IISadmin@123'
+              AddBinding: true
+              Bindings: 'http/All Unassigned:80:'
+              # CreateOrUpdateAppPoolForWebsite: true
+              # ConfigureAuthenticationForWebsite: true
+              # AppPoolNameForWebsite: 'test'
+              # DotNetVersionForWebsite: 'v4.0'
+              # PipeLineModeForWebsite: 'Integrated'
+              # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            inputs:
+              WebSiteName: 'IIS Web App Deploy'
+              Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
