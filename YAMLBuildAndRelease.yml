@@ -3,8 +3,7 @@
 # Add steps that publish symbols, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
-trigger:
-- master
+trigger: none
 
 pool:
   vmImage: 'windows-latest'
@@ -14,6 +13,55 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   websiteName: 'Default Web Site'
+
+parameters:
+- name: EnableIIS
+  displayName: Enable IIS
+  type: boolean
+  default: true
+  
+- name: IISDeploymentType
+  displayName: Configuration type
+  type: string
+  default: IIS Website
+  values: 
+    - IIS Website
+    - IIS Web Application
+    - IIS Virtual Directory
+    - IIS Application Pool
+
+- name: ActionIISWebsite
+  displayName: Action
+  type: string
+  default: Create Or Update
+  values: 
+    - Create Or Update
+    - Start
+    - Stop
+
+- name: WebsiteName
+  displayName: WebSite Name
+  type: string
+  default: Default Web Site
+  
+- name: WebsitePhysicalPath
+  displayName: Physical path
+  type: string
+  default: '%SystemDrive%\inetpub\wwwroot'
+ 
+- name: WebsiteAuthUserName
+  displayName: WebsiteAuthUserName
+  type: string 
+  default: iisadmin
+  
+- name: WebsiteAuthUserPassword
+  displayName: WebsiteAuthUserPassword
+  type: string
+
+- name: Package
+  displayName: IIS Deploy Package
+  type: string
+  default: 'C:\azagent\*\_work\1\drop\*.zip'
 
 stages:
 - stage: 'Build'
@@ -80,39 +128,48 @@ stages:
       runOnce:
         deploy:
           steps: 
+          - template: ./template/IISWebAppDeployment_template.yml
+            parameters:
+              EnableIIS: '$(Parameters.EnableIIS)'
+              IISDeploymentType: '$(Parameters.IISDeploymentType)'
+              ActionIISWebsite: '$(Parameters.ActionIISWebsite)'
+              WebsiteName: '$(Parameters.WebsiteName)'
+              WebsitePhysicalPath: '$(Parameters.WebsitePhysicalPath)'
+              WebsiteAuthUserName: '$(Parameters.WebsiteAuthUserName)'
+              WebsiteAuthUserPassword: '$(Parameters.WebsiteAuthUserPassword)'
+              Package: '$(Parameters.Package)'
 
-
-          - task: IISWebAppManagementOnMachineGroup@0
-            inputs:
-              EnableIIS: true
-              IISDeploymentType: 'IISWebsite'
-              ActionIISWebsite: 'CreateOrUpdateWebsite'
-              WebsiteName: 'Default Web Site'
-              WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
-              WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
-              WebsiteAuthUserName: 'iisadmin'
-              WebsiteAuthUserPassword: 'IISadmin@123'
-              AddBinding: true
-              Bindings: |
-                  {
-                      bindings:[
-                          {
-                              "protocol":"http",
-                              "ipAddress":"",
-                              "hostname":"",
-                              "port":"80",
-                              "sslThumbprint":"",
-                              "sniFlag":false
-                          }
-                      ]
-                  }
-              # CreateOrUpdateAppPoolForWebsite: true
-              # ConfigureAuthenticationForWebsite: true
-              # AppPoolNameForWebsite: 'test'
-              # DotNetVersionForWebsite: 'v4.0'
-              # PipeLineModeForWebsite: 'Integrated'
-              # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
-          - task: IISWebAppDeploymentOnMachineGroup@0
-            inputs:
-              WebSiteName: 'Default Web Site'
-              Package: 'C:\azagent\A10\_work\1\drop\*.zip'
+          # - task: IISWebAppManagementOnMachineGroup@0
+          #   inputs:
+          #     EnableIIS: true
+          #     IISDeploymentType: 'IISWebsite'
+          #     ActionIISWebsite: 'CreateOrUpdateWebsite'
+          #     WebsiteName: 'Default Web Site'
+          #     WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+          #     WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
+          #     WebsiteAuthUserName: 'iisadmin'
+          #     WebsiteAuthUserPassword: 'IISadmin@123'
+          #     AddBinding: true
+          #     Bindings: |
+          #         {
+          #             bindings:[
+          #                 {
+          #                     "protocol":"http",
+          #                     "ipAddress":"",
+          #                     "hostname":"",
+          #                     "port":"80",
+          #                     "sslThumbprint":"",
+          #                     "sniFlag":false
+          #                 }
+          #             ]
+          #         }
+          #     # CreateOrUpdateAppPoolForWebsite: true
+          #     # ConfigureAuthenticationForWebsite: true
+          #     # AppPoolNameForWebsite: 'test'
+          #     # DotNetVersionForWebsite: 'v4.0'
+          #     # PipeLineModeForWebsite: 'Integrated'
+          #     # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
+          # - task: IISWebAppDeploymentOnMachineGroup@0
+          #   inputs:
+          #     WebSiteName: 'Default Web Site'
+          #     Package: 'C:\azagent\A10\_work\1\drop\*.zip'
