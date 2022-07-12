@@ -25,12 +25,12 @@ parameters:
 - name: IISDeploymentType
   displayName: Configuration type
   type: string
-  default: IIS Website
+  default: IISWebsite
   values: 
-    - IIS Website
-    - IIS Web Application
-    - IIS Virtual Directory
-    - IIS Application Pool
+    - IISWebsite
+    - IISWebApplication
+    - IISVirtualDirectory
+    - IISApplicationPool
 
 - name: ActionIISWebsite
   displayName: Action
