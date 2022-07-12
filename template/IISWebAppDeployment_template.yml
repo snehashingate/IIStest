@@ -1,26 +1,19 @@
 parameters:
-- name: EnableIIS
+- name: 'EnableIIS'
   type: boolean
-
-- name: IISDeploymentType
+- name: 'IISDeploymentType'
   type: string
-	
-- name: ActionIISWebsite
+- name: 'ActionIISWebsite'
+  type: string	
+- name: 'WebsiteName'
   type: string
-	
-- name: WebsiteName
+- name: 'WebsitePhysicalPath'
   type: string
-  
-- name: WebsitePhysicalPath
+- name: 'WebsiteAuthUserName'
+  type: string  
+- name: 'WebsiteAuthUserPassword'
   type: string
- 
-- name: WebsiteAuthUserName
-  type: string 
-  
-- name: WebsiteAuthUserPassword
-  type: string
-  
-- name: Package
+- name: 'Package'
   type: string
 
 steps:
