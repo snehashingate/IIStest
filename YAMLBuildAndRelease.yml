@@ -16,7 +16,7 @@ variables:
 
 parameters:
 - name: EnableIIS
-  displayName: Enable IIS
+  displayName: "IIS Deploy \n Enable IIS"
   type: boolean
   default: true
   
@@ -130,7 +130,7 @@ stages:
           steps: 
           - template: ./template/IISWebAppDeployment_template.yml
             parameters:
-              EnableIIS: '***$(Parameters.EnableIIS)***'
+              EnableIIS: '$(Parameters.EnableIIS)'
               IISDeploymentType: '$(Parameters.IISDeploymentType)'
               ActionIISWebsite: '$(Parameters.ActionIISWebsite)'
               WebsiteName: '$(Parameters.WebsiteName)'
