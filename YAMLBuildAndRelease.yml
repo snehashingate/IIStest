@@ -16,7 +16,7 @@ variables:
 
 parameters:
 - name: EnableIIS
-  displayName: "IIS Deploy \n Enable IIS"
+  displayName: "Enable IIS"
   type: boolean
   default: true
   
