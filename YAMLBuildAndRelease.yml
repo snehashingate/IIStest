@@ -106,12 +106,12 @@ stages:
                           }
                       ]
                   }
-              # CreateOrUpdateAppPoolForWebsite: true
-              # ConfigureAuthenticationForWebsite: true
-              # AppPoolNameForWebsite: 'test'
-              # DotNetVersionForWebsite: 'v4.0'
-              # PipeLineModeForWebsite: 'Integrated'
-              # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
+              CreateOrUpdateAppPoolForWebsite: true
+              ConfigureAuthenticationForWebsite: true
+              AppPoolNameForWebsite: 'test'
+              DotNetVersionForWebsite: 'v4.0'
+              PipeLineModeForWebsite: 'Integrated'
+              AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
               WebSiteName: 'IIS Web App Deploy'
