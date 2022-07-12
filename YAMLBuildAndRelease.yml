@@ -17,7 +17,10 @@ variables:
 parameters:
 - name: EnableIIS
   displayName: "Enable IIS"
-  type: boolean
+  type: string
+  values:
+    - true
+    - false
 
 - name: IISDeploymentType
   displayName: Configuration type
