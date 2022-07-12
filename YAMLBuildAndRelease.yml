@@ -18,8 +18,7 @@ parameters:
 - name: EnableIIS
   displayName: "Enable IIS"
   type: boolean
-  default: true
-  
+
 - name: IISDeploymentType
   displayName: Configuration type
   type: string
