@@ -1,0 +1,55 @@
+parameters:
+- name: EnableIIS
+  type: boolean
+
+- name: IISDeploymentType
+  type: string
+	
+- name: ActionIISWebsite
+  type: string
+	
+- name: WebsiteName
+  type: string
+  
+- name: WebsitePhysicalPath
+  type: string
+ 
+- name: WebsiteAuthUserName
+  type: string 
+  
+- name: WebsiteAuthUserPassword
+  type: string
+  
+- name: Package
+  type: string
+
+steps:
+- task: IISWebAppManagementOnMachineGroup@0
+  inputs:
+      EnableIIS: '$(Parameters.EnableIIS)'
+      IISDeploymentType: '$(Parameters.IISDeploymentType)'
+      ActionIISWebsite: '$(Parameters.ActionIISWebsite)'
+      WebsiteName: '$(Parameters.WebsiteName)'
+      WebsitePhysicalPath: '$(Parameters.WebsitePhysicalPath)'
+      WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
+      WebsiteAuthUserName: '$(Parameters.WebsiteAuthUserName)'
+      WebsiteAuthUserPassword: '$(Parameters.WebsiteAuthUserPassword)'
+      AddBinding: true
+      Bindings: |
+                  {
+                      bindings:[
+                          {
+                              "protocol":"http",
+                              "ipAddress":"",
+                              "hostname":"",
+                              "port":"80",
+                              "sslThumbprint":"",
+                              "sniFlag":false
+                          }
+                      ]
+                  }
+   
+- task: IISWebAppDeploymentOnMachineGroup@0
+  inputs:
+      WebSiteName: '$(Parameters.WebsiteName)'
+      Package: '$(Parameters.Package)'
