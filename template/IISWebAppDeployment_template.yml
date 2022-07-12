@@ -1,6 +1,6 @@
 parameters:
 - name: 'EnableIIS'
-  type: boolean
+  type: string
 - name: 'IISDeploymentType'
   type: string
 - name: 'ActionIISWebsite'
