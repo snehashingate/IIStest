@@ -114,6 +114,5 @@ stages:
               # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
           - task: IISWebAppDeploymentOnMachineGroup@0
             inputs:
-              WebSiteName: 'IIS Web App Deploy'
+              WebSiteName: 'Default Web Site'
               Package: 'C:\azagent\A10\_work\1\drop\*.zip'
-            
