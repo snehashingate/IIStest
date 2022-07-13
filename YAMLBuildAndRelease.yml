@@ -132,14 +132,14 @@ stages:
           steps: 
           - template: ./template/IISWebAppDeployment_template.yml
             parameters:
-              EnableIIS: '$(Parameters.EnableIIS)'
-              IISDeploymentType: '$(Parameters.IISDeploymentType)'
-              ActionIISWebsite: '$(Parameters.ActionIISWebsite)'
-              WebsiteName: '$(Parameters.WebsiteName)'
-              WebsitePhysicalPath: '$(Parameters.WebsitePhysicalPath)'
-              WebsiteAuthUserName: '$(Parameters.WebsiteAuthUserName)'
-              WebsiteAuthUserPassword: '$(Parameters.WebsiteAuthUserPassword)'
-              Package: '$(Parameters.Package)'
+              EnableIIS: '${{Parameters.EnableIIS}}'
+              IISDeploymentType: '${{Parameters.IISDeploymentType}}'
+              ActionIISWebsite: '${{Parameters.ActionIISWebsite}}'
+              WebsiteName: '${{Parameters.WebsiteName}}'
+              WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
+              WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
+              WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
+              Package: '${{Parameters.Package}}'
 
           # - task: IISWebAppManagementOnMachineGroup@0
           #   inputs:
