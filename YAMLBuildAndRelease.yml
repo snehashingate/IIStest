@@ -142,7 +142,7 @@ stages:
               WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
               # WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
-              WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
+              WebsiteAuthUserPassword: $(variables.password)
               Package: '${{Parameters.Package}}'
 
           # - task: IISWebAppManagementOnMachineGroup@0
