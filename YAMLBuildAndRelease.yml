@@ -13,7 +13,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   websiteName: 'Default Web Site'
-  WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
+  
 
 parameters:
 - name: EnableIIS
@@ -127,6 +127,8 @@ stages:
      variables:
      - name: websitePhysicalPath
        value: '%SystemDrive%\inetpub\wwwroot'
+     - name: WebsiteAuthUserPassword
+       value: $(WebsiteAuthUserPassword)
 
      strategy:
       runOnce:
