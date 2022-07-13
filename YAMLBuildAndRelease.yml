@@ -13,7 +13,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   websiteName: 'Default Web Site'
-  
+  WebsiteAuthUserPassword: $(IIServer.WebsiteAuthUserPassword)
 
 parameters:
 - name: EnableIIS
