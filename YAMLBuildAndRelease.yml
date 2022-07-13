@@ -127,7 +127,6 @@ stages:
      variables:
      - name: websitePhysicalPath
        value: '%SystemDrive%\inetpub\wwwroot'
-     - 
 
      strategy:
       runOnce:
