@@ -123,13 +123,7 @@ stages:
      environment: 
        name: 'Dev'    
        resourceType: VirtualMachine
-       resourceName: IISWebServer
-     variables:
-     - name: websitePhysicalPath
-       value: '%SystemDrive%\inetpub\wwwroot'
-     - name: WebsiteAuthUserPassword
-       value: $(WebsiteAuthUserPassword)
-
+       resourceName: IISWebServe
      strategy:
       runOnce:
         deploy:
@@ -143,7 +137,7 @@ stages:
               WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
               # WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
-              WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
+              WebsiteAuthUserPassword: $(variables.WebsiteAuthUserPassword)
               Package: '${{Parameters.Package}}'
 
           # - task: IISWebAppManagementOnMachineGroup@0
