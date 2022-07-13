@@ -13,6 +13,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   websiteName: 'Default Web Site'
+  Password: $(password)
 
 parameters:
 - name: EnableIIS
@@ -59,6 +60,7 @@ parameters:
 - name: WebsiteAuthUserPassword
   displayName: WebsiteAuthUserPassword
   type: string
+
 
 - name: Package
   displayName: IIS Deploy Package
@@ -138,7 +140,8 @@ stages:
               WebsiteName: '${{Parameters.WebsiteName}}'
               WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
-              WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
+              # WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
+              WebsiteAuthUserPassword: $(Password)
               Package: '${{Parameters.Package}}'
 
           # - task: IISWebAppManagementOnMachineGroup@0
