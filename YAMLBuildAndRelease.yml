@@ -35,11 +35,11 @@ parameters:
 - name: ActionIISWebsite
   displayName: Action
   type: string
-  default: Create Or Update
+  default: CreateOrUpdateWebsite
   values: 
-    - Create Or Update
-    - Start
-    - Stop
+    - CreateOrUpdateWebsite
+    - StartWebsite
+    - StopWebsite
 
 - name: WebsiteName
   displayName: WebSite Name
