@@ -11,8 +11,8 @@ parameters:
   type: string
 - name: 'WebsiteAuthUserName'
   type: string  
-- name: 'WebsiteAuthUserPassword'
-  type: string
+# - name: 'WebsiteAuthUserPassword'
+#   type: string
 - name: 'Package'
   type: string
 
@@ -26,7 +26,8 @@ steps:
       WebsitePhysicalPath: '${{ Parameters.WebsitePhysicalPath }}'
       WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
       WebsiteAuthUserName: '${{ Parameters.WebsiteAuthUserName }}'
-      WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
+      #WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
+      WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
       AddBinding: true
       Bindings: |
                   {
