@@ -27,7 +27,7 @@ steps:
       WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
       WebsiteAuthUserName: '${{ Parameters.WebsiteAuthUserName }}'
       #WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
-      WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
+      WebsiteAuthUserPassword: $(Password)
       AddBinding: true
       Bindings: |
                   {
