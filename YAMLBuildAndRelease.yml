@@ -5,15 +5,18 @@
 
 trigger: none
 
+  
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  websiteName: 'Default Web Site'
+# parameters:
+#   solution: '**/*.sln'
+#   buildPlatform: 'Any CPU'
+#   buildConfiguration: 'Release'
+#   websiteName: 'Default Web Site'
 
+variables:
+- group: IIServer
 
 parameters:
 - name: EnableIIS
@@ -57,10 +60,10 @@ parameters:
   type: string 
   default: iisadmin
   
-# - name: WebsiteAuthUserPassword
-#   displayName: WebsiteAuthUserPassword
-#   type: string
-
+- name: WebsiteAuthUserPassword
+  displayName: WebsiteAuthUserPassword
+  type: string
+  default: $(WebsiteAuthUserPassword) 
 
 - name: Package
   displayName: IIS Deploy Package
@@ -70,6 +73,7 @@ parameters:
 stages:
 - stage: 'Build'
   displayName: 'Build'
+  
   jobs:
      - job:
        steps:
@@ -142,7 +146,7 @@ stages:
               WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
               # WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
-              WebsiteAuthUserPassword: $(variables.IIServer)
+              WebsiteAuthUserPassword: $(WebsiteAuthUserPassword)
               Package: '${{Parameters.Package}}'
 
           # - task: IISWebAppManagementOnMachineGroup@0
