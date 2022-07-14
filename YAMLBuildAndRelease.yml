@@ -9,14 +9,13 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
-# parameters:
-#   solution: '**/*.sln'
-#   buildPlatform: 'Any CPU'
-#   buildConfiguration: 'Release'
-#   websiteName: 'Default Web Site'
-
 variables:
- Password: $(WebsiteAuthUserPassword)
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  websiteName: 'Default Web Site'
+  Password: $(WebsiteAuthUserPassword)
+ 
 
 parameters:
 - name: EnableIIS
