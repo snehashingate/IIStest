@@ -132,7 +132,7 @@ stages:
      environment: 
        name: 'Dev'    
        resourceType: VirtualMachine
-       resourceName: IISWebServe
+       resourceName: IISWebServer
      strategy:
       runOnce:
         deploy:
