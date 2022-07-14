@@ -62,7 +62,7 @@ parameters:
   
 - name: Password
   displayName: Password
-  type: string
+  # type: string
   default: $(WebsiteAuthUserPassword) 
 
 - name: Package
