@@ -72,49 +72,37 @@ parameters:
 stages:
 - stage: 'Build'
   displayName: 'Build'
-  
   jobs:
      - job:
        steps:
         - task: NuGetToolInstaller@1
-
         - task: NuGetCommand@2
           inputs:
             restoreSolution: '$(solution)'
-
         - task: VSBuild@1
           inputs:
             solution: '$(solution)'
             msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
-
-        - task: VSTest@2
-          inputs:
-            platform: '$(buildPlatform)'
-            configuration: '$(buildConfiguration)'
-
-        # - task: PublishPipelineArtifact@1
-        #   inputs:
-        #     targetPath: '$(Pipeline.Workspace)'
-        #     publishLocation: 'pipeline'
-        # - task: CopyFiles@2
-        #   inputs:
-        #     Contents: '**'
-        #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-        # - task: ArchiveFiles@2
-        #   inputs:
-        #     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/application'
-        #     includeRootFolder: false
-        #     archiveType: 'zip'
-        #     archiveFile: '$(Build.ArtifactStagingDirectory)/app/application.zip'
-
         - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
-
+- stage: 'Run_Unit_tests'
+  dependsOn: 'Build'
+  jobs: 
+  - job: Test
+    steps:
+      - task: VSTest@2
+        inputs:
+          testSelector: 'testAssemblies'
+          testAssemblyVer2: |
+            **\*test*.dll
+            !**\*TestAdapter.dll
+            !**\obj\**
+          searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - stage: 'Dev'
   displayName: 'Dev'
@@ -148,37 +136,3 @@ stages:
               #WebsiteAuthUserPassword: $(Password)
               Package: '${{Parameters.Package}}'
 
-          # - task: IISWebAppManagementOnMachineGroup@0
-          #   inputs:
-          #     EnableIIS: true
-          #     IISDeploymentType: 'IISWebsite'
-          #     ActionIISWebsite: 'CreateOrUpdateWebsite'
-          #     WebsiteName: 'Default Web Site'
-          #     WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
-          #     WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
-          #     WebsiteAuthUserName: 'iisadmin'
-          #     WebsiteAuthUserPassword: 'IISadmin@123'
-          #     AddBinding: true
-          #     Bindings: |
-          #         {
-          #             bindings:[
-          #                 {
-          #                     "protocol":"http",
-          #                     "ipAddress":"",
-          #                     "hostname":"",
-          #                     "port":"80",
-          #                     "sslThumbprint":"",
-          #                     "sniFlag":false
-          #                 }
-          #             ]
-          #         }
-          #     # CreateOrUpdateAppPoolForWebsite: true
-          #     # ConfigureAuthenticationForWebsite: true
-          #     # AppPoolNameForWebsite: 'test'
-          #     # DotNetVersionForWebsite: 'v4.0'
-          #     # PipeLineModeForWebsite: 'Integrated'
-          #     # AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
-          # - task: IISWebAppDeploymentOnMachineGroup@0
-          #   inputs:
-          #     WebSiteName: 'Default Web Site'
-          #     Package: 'C:\azagent\A10\_work\1\drop\*.zip'
