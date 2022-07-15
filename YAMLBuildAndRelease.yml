@@ -106,7 +106,7 @@ stages:
 
 - stage: 'Dev'
   displayName: 'Dev'
-  dependsOn: 'Build'
+  dependsOn: 'Run_Unit_tests'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   # variables:
   # - group: IIServer
