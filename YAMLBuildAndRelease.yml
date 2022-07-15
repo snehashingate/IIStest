@@ -90,7 +90,9 @@ stages:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
+
 - stage: 'Run_Unit_tests'
+  displayName: 'Run_Unit_tests'
   dependsOn: 'Build'
   jobs: 
   - job: Test
@@ -104,16 +106,11 @@ stages:
             !**\obj\**
           searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- stage: 'Dev'
-  displayName: 'Dev'
+- stage: 'Deploy_In_Dev'
+  displayName: 'Deploy_In_Dev'
   dependsOn: 'Run_Unit_tests'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  # variables:
-  # - group: IIServer
-  #- name: password
-   # value: $[WebsiteAuthUserPassword]
-  jobs:
-   
+  jobs:  
    - deployment: Dev
      displayName: Dev
      environment: 
@@ -132,7 +129,29 @@ stages:
               WebsiteName: '${{Parameters.WebsiteName}}'
               WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
-              # WebsiteAuthUserPassword: '${{Parameters.WebsiteAuthUserPassword}}'
-              #WebsiteAuthUserPassword: $(Password)
               Package: '${{Parameters.Package}}'
 
+- stage: 'Deploy_In_QA'
+  displayName: 'Deploy_In_QA'
+  dependsOn: 'Deploy_In_Dev'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:  
+   - deployment: QA
+     displayName: QA
+     environment: 
+       name: 'QA'    
+       resourceType: VirtualMachine
+       resourceName: IISWebServerQA
+     strategy:
+      runOnce:
+        deploy:
+          steps: 
+          - template: ./template/IISWebAppDeployment_template.yml
+            parameters:
+              EnableIIS: '${{Parameters.EnableIIS}}'
+              IISDeploymentType: '${{Parameters.IISDeploymentType}}'
+              ActionIISWebsite: '${{Parameters.ActionIISWebsite}}'
+              WebsiteName: '${{Parameters.WebsiteName}}'
+              WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
+              WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
+              Package: '${{Parameters.Package}}'
