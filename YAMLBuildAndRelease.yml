@@ -139,7 +139,7 @@ stages:
    - deployment: QA
      displayName: QA
      environment: 
-       name: 'QA'    
+       name: 'QA'
        resourceType: VirtualMachine
        resourceName: IISWebServerQA
      strategy:
