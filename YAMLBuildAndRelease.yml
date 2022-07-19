@@ -6,7 +6,7 @@
 trigger: none
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: $(image)
 
 variables:
   solution: '**/*.sln'
@@ -14,7 +14,7 @@ variables:
   buildConfiguration: 'Release'
   websiteName: 'Default Web Site'
   Password: $(WebsiteAuthUserPassword)
-
+  #vmImage: $(image)
 parameters:
 - name: EnableIIS
   displayName: "Enable IIS"
