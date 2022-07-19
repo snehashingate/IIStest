@@ -19,6 +19,7 @@ parameters:
 - name: EnableIIS
   displayName: "Enable IIS"
   type: string
+  default: true
   values:
     - true
     - false
