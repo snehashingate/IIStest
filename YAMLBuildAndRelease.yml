@@ -116,7 +116,7 @@ stages:
 
 - stage: 'Deploy_In_Dev'
   displayName: 'Deploy_In_Dev'
-  dependsOn: 'Run_Unit_tests'
+  dependsOn: 'Build'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:  
    - deployment: Dev
