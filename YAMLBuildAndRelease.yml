@@ -84,26 +84,35 @@ stages:
             msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
+        - task: VSTest@2
+          inputs:
+            testSelector: 'testAssemblies'
+            testAssemblyVer2: |
+              **\*test*.dll
+              !**\*TestAdapter.dll
+              !**\obj\**
+            searchFolder: '$(System.DefaultWorkingDirectory)'
+
         - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
 
-- stage: 'Run_Unit_tests'
-  displayName: 'Run_Unit_tests'
-  dependsOn: 'Build'
-  jobs: 
-  - job: Test
-    steps:
-      - task: VSTest@2
-        inputs:
-          testSelector: 'testAssemblies'
-          testAssemblyVer2: |
-            **\*test*.dll
-            !**\*TestAdapter.dll
-            !**\obj\**
-          searchFolder: '$(System.DefaultWorkingDirectory)'
+# - stage: 'Run_Unit_tests'
+#   displayName: 'Run_Unit_tests'
+#   dependsOn: 'Build'
+#   jobs: 
+#   - job: Test
+#     steps:
+#       - task: VSTest@2
+#         inputs:
+#           testSelector: 'testAssemblies'
+#           testAssemblyVer2: |
+#             **\*test*.dll
+#             !**\*TestAdapter.dll
+#             !**\obj\**
+#           searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - stage: 'Deploy_In_Dev'
   displayName: 'Deploy_In_Dev'
