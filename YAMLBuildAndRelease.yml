@@ -118,13 +118,17 @@ stages:
   displayName: 'Deploy_In_Dev'
   dependsOn: 'Build'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # pool: 
+  #  name: AgentPoolName(e.g. alm-aws-pool)
+  #  demands:
+  #   - agent.name -equals Agentname (e.g. deploy-05-agent1)
   jobs:  
    - deployment: Dev
      displayName: Dev
-     environment: 
-       name: 'Dev'    
-       resourceType: VirtualMachine
-       resourceName: IISWebServer
+    #  environment: 
+    #    name: 'Dev'    
+    #    resourceType: VirtualMachine
+    #    resourceName: IISWebServer
      strategy:
       runOnce:
         deploy:
@@ -143,13 +147,17 @@ stages:
   displayName: 'Deploy_In_QA'
   dependsOn: 'Deploy_In_Dev'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # pool: 
+  #  name: AgentPoolName(e.g. alm-aws-pool)
+  #  demands:
+  #   - agent.name -equals Agentname (e.g. deploy-05-agent1)
   jobs:  
    - deployment: QA
      displayName: QA
-     environment: 
-       name: 'QA'
-       resourceType: VirtualMachine
-       resourceName: IISWebServerQA
+    #  environment: 
+    #    name: 'QA'
+    #    resourceType: VirtualMachine
+    #    resourceName: IISWebServerQA
      strategy:
       runOnce:
         deploy:
