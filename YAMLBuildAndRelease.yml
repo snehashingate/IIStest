@@ -128,10 +128,6 @@ stages:
   jobs:  
    - deployment: Dev
      displayName: Dev
-    #  environment: 
-    #    name: 'Dev'    
-    #    resourceType: VirtualMachine
-    #    resourceName: IISWebServer
      strategy:
       runOnce:
         deploy:
