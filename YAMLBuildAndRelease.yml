@@ -5,7 +5,9 @@
 
 trigger: none
 
-pool: windows-latest
+pool: 
+  name: IISWebServer
+  # demands: string | [ string ] # List of demands (for a private pool)
 
 variables:
   solution: '**/*.sln'
