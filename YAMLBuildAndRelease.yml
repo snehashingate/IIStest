@@ -6,7 +6,9 @@
 trigger: none
 
 pool: 
-  name: IISWebServer
+  name: Default
+  demands:
+    - agent.name -equals IISWebServer
   # demands: string | [ string ] # List of demands (for a private pool)
 
 variables:
