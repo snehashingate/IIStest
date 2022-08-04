@@ -5,9 +5,7 @@
 
 trigger: none
 
-pool:
-  name: Default
-  vmImage: IISWebServer
+pool: windows-latest
 
 variables:
   solution: '**/*.sln'
