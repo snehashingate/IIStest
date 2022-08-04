@@ -120,14 +120,14 @@ stages:
 - stage: 'Deploy_In_Dev'
   displayName: 'Deploy_In_Dev'
   dependsOn: 'Build'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  pool: 
-   name: Default
-   demands:
-    - agent.name -equals IISWebServer 
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
   jobs:  
    - deployment: Dev
      displayName: Dev
+     pool: 
+      name: Default
+      demands:
+      - agent.name -equals IISWebServer
      strategy:
       runOnce:
         deploy:
