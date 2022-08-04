@@ -131,7 +131,6 @@ stages:
       name: Default
       demands:
       - agent.name -equals IISWebServer
-
      environment: 
        name: 'Dev'    
        resourceType: VirtualMachine
