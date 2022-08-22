@@ -52,7 +52,7 @@ parameters:
 - name: WebsiteName
   displayName: WebSite Name
   type: string
-  default: Default Web Site
+  default: Hexaware_IIS
   
 - name: WebsitePhysicalPath
   displayName: Physical path
