@@ -6,13 +6,14 @@
 trigger: none
 
 pool: 
-  name: Default
-  demands:
-    - agent.name -equals IISWebServer
-    - Agent.Version -equals 2.206.1
-    - MSBuild
-    - VisualStudio
-    - VSTest
+  vmImage: windows-latest
+  # name: Default
+  # demands:
+  #   - agent.name -equals IISWebServer
+  #   - Agent.Version -equals 2.206.1
+  #   - MSBuild
+  #   - VisualStudio
+  #   - VSTest
 
 variables:
   solution: '**/*.sln'
