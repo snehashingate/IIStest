@@ -32,7 +32,7 @@ steps:
       WebsiteAuthUserPassword: $(Password)
       CreateOrUpdateAppPoolForWebsite: true
       AppPoolNameForWebsite: '${{ Parameters.WebsiteName }}'
-      DotNetVersionForWebsite: 'v4.0'
+      DotNetVersionForWebsite: '${{ Parameters.DotNetVersionForWebsite }}'
       PipeLineModeForWebsite: 'Integrated'
       AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
       AddBinding: true
