@@ -25,7 +25,7 @@ steps:
       IISDeploymentType: '${{ Parameters.IISDeploymentType }}'
       ActionIISWebsite: '${{ Parameters.ActionIISWebsite }}'
       WebsiteName: '${{ Parameters.WebsiteName }}'
-      WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
+      WebsitePhysicalPath: '%SystemDrive%\appDeploy\${{Parameters.WebsiteName}}'
       WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
       WebsiteAuthUserName: '${{ Parameters.WebsiteAuthUserName }}'
       #WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
