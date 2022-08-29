@@ -19,7 +19,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  websiteName: 'EICadmin_hexa'
+  # websiteName: 'EICadmin_hexa'
   Password: $(WebsiteAuthUserPassword)
 
 parameters:
@@ -53,12 +53,12 @@ parameters:
 - name: WebsiteName
   displayName: WebSite Name
   type: string
-  default: Hexaware_IIS
+  default: EICadmin_hexa
   
 - name: WebsitePhysicalPath
   displayName: Physical path
   type: string
-  default: '%SystemDrive%\inetpub\wwwroot\$(websiteName)'
+  default: '%SystemDrive%\inetpub\wwwroot\$(WebsiteName)'
  
 - name: WebsiteAuthUserName
   displayName: WebsiteAuthUserName
