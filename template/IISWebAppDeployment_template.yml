@@ -30,7 +30,7 @@ steps:
       WebsiteAuthUserPassword: $(Password)
       CreateOrUpdateAppPoolForWebsite: true
       AppPoolNameForWebsite: 'EICadmin_hexa'
-      DotNetVersionForWebsite: 'No Managed Code'
+      DotNetVersionForWebsite: 'v4.0'
       PipeLineModeForWebsite: 'Integrated'
       AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
       AddBinding: true
