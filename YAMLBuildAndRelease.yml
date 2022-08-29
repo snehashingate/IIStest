@@ -55,10 +55,10 @@ parameters:
   type: string
   default: EICadmin_hexa
   
-- name: WebsitePhysicalPath
-  displayName: Physical path
-  type: string
-  default: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
+# - name: WebsitePhysicalPath
+#   displayName: Physical path
+#   type: string
+#   default: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
  
 - name: WebsiteAuthUserName
   displayName: WebsiteAuthUserName
