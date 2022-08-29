@@ -28,6 +28,11 @@ steps:
       WebsiteAuthUserName: '${{ Parameters.WebsiteAuthUserName }}'
       #WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
       WebsiteAuthUserPassword: $(Password)
+      CreateOrUpdateAppPoolForWebsite: true
+      AppPoolNameForWebsite: 'EICadmin_hexa'
+      DotNetVersionForWebsite: 'No Managed Code'
+      PipeLineModeForWebsite: 'Integrated'
+      AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
       AddBinding: true
       Bindings: |
                   {
