@@ -58,7 +58,7 @@ parameters:
 - name: WebsitePhysicalPath
   displayName: Physical path
   type: string
-  # default: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
+  default: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
  
 - name: WebsiteAuthUserName
   displayName: WebsiteAuthUserName
@@ -171,6 +171,6 @@ stages:
               IISDeploymentType: '${{Parameters.IISDeploymentType}}'
               ActionIISWebsite: '${{Parameters.ActionIISWebsite}}'
               WebsiteName: '${{Parameters.WebsiteName}}'
-              WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
+              # WebsitePhysicalPath: '${{Parameters.WebsitePhysicalPath}}'
               WebsiteAuthUserName: '${{Parameters.WebsiteAuthUserName}}'
               Package: '${{Parameters.Package}}'
