@@ -58,7 +58,7 @@ parameters:
 - name: WebsitePhysicalPath
   displayName: Physical path
   type: string
-  default: '%SystemDrive%\inetpub\wwwroot\$(WebsiteName)'
+  default: '%SystemDrive%\inetpub\wwwroot\${{Parameters.WebsiteName}}'
  
 - name: WebsiteAuthUserName
   displayName: WebsiteAuthUserName
