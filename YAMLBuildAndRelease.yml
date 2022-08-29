@@ -53,7 +53,7 @@ parameters:
 - name: WebsiteName
   displayName: WebSite Name
   type: string
-  default: EICadmin
+  default: EICadmin_Hexaware
   
 - name: DotNetVersionForWebsite
   displayName: DotNetVersionForWebsite
