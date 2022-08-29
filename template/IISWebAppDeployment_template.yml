@@ -15,6 +15,8 @@ parameters:
 #   type: string
 - name: 'Package'
   type: string
+- name: 'DotNetVersionForWebsite'
+  type: string
 
 steps:
 - task: IISWebAppManagementOnMachineGroup@0
@@ -29,7 +31,7 @@ steps:
       #WebsiteAuthUserPassword: '${{ Parameters.WebsiteAuthUserPassword }}'
       WebsiteAuthUserPassword: $(Password)
       CreateOrUpdateAppPoolForWebsite: true
-      AppPoolNameForWebsite: 'EICadmin_hexa'
+      AppPoolNameForWebsite: '${{ Parameters.WebsiteName }}'
       DotNetVersionForWebsite: 'v4.0'
       PipeLineModeForWebsite: 'Integrated'
       AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
