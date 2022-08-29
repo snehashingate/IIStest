@@ -44,7 +44,7 @@ steps:
                               "ipAddress":"",
                               "hostname":"",
                               "port":"443",
-                              "sslThumbprint":"607a87aea7a828aa86110b207707ea78a087bd21",
+                              "sslThumbprint":"607A87AEA7A828AA86110B207707EA78A087BD21",
                               "sniFlag":false
                           }
                       ]
