@@ -40,11 +40,11 @@ steps:
                   {
                       bindings:[
                           {
-                              "protocol":"https",
+                              "protocol":"http",
                               "ipAddress":"",
-                              "hostname":"$(hostname)",
-                              "port":"443",
-                              "sslThumbprint":"607a87aea7a828aa86110b207707ea78a087bd21",
+                              "hostname":"$(hostname-qa)",
+                              "port":"80",
+                              "sslThumbprint":"",
                               "sniFlag":false
                           }
                       ]
