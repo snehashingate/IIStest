@@ -99,6 +99,13 @@ stages:
             msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
+        
+        # - task: FileTransform@1
+        #   inputs:
+        #     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        #     enableXmlTransform: true
+        #     xmlTransformationRules: '-transform **\*.Dev.config -xml **\*.config'
+        
         - task: VSTest@2
           inputs:
             testSelector: 'testAssemblies'
