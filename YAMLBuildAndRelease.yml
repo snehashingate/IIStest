@@ -107,11 +107,11 @@ stages:
               !**\*TestAdapter.dll
               !**\obj\**
             searchFolder: '$(System.DefaultWorkingDirectory)'
-        - task: FileTransform@1
-          inputs:
-            folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
-            enableXmlTransform: true
-            xmlTransformationRules: '-transform **\*.Dev.config -xml **\*.config'
+        # - task: FileTransform@1
+        #   inputs:
+        #     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        #     enableXmlTransform: true
+        #     xmlTransformationRules: '-transform **\*.Dev.config -xml **\*.config'
         - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
