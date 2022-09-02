@@ -36,28 +36,19 @@ steps:
       PipeLineModeForWebsite: 'Integrated'
       AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
       AddBinding: true
-      protocol: 'http'
-      iPAddress: 'All Unassigned'
-      port: '80'
-      protocol: 'https'
-      iPAddress: 'All Unassigned'
-      port: '443'
-      serverNameIndication: true
-      hostNameWithSNI: 'EICadmin'
-      sSLCertThumbPrint:'607a87aea7a828aa86110b207707ea78a087bd21'
-      # Bindings: |
-      #             {
-      #                 bindings:[
-      #                     {
-      #                         "protocol":"https",
-      #                         "ipAddress":"",
-      #                         "hostname":"",
-      #                         "port":"443",
-      #                         "sslThumbprint":"607a87aea7a828aa86110b207707ea78a087bd21",
-      #                         "sniFlag":false
-      #                     }
-      #                 ]
-      #             }
+      Bindings: |
+                  {
+                      bindings:[
+                          {
+                              "protocol":"https",
+                              "ipAddress":"",
+                              "hostname":"",
+                              "port":"443",
+                              "sslThumbprint":"607a87aea7a828aa86110b207707ea78a087bd21",
+                              "sniFlag":false
+                          }
+                      ]
+                  }
    
 - task: IISWebAppDeploymentOnMachineGroup@0
   inputs:
