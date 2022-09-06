@@ -23,7 +23,8 @@ steps:
   inputs:
       targetType: 'inline'
       script: |                         
-        Write-Host "$(System.DefaultWorkingDirectory)"
+        Write-Host "System default working Directory -> $(System.DefaultWorkingDirectory)"
+        Write-Host "Build Artifact Publish Path -> $(build.artifactStagingDirectory)"
 
 - task: IISWebAppManagementOnMachineGroup@0
   inputs:
