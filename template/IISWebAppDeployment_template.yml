@@ -25,6 +25,7 @@ steps:
       script: |                         
         Write-Host "System default working Directory -> $(System.DefaultWorkingDirectory)"
         Write-Host "Build Artifact Publish Path -> $(build.artifactStagingDirectory)"
+        Write-Host "Agent Build Directory -> $(Agent.BuildDirectory)"
 
 - task: IISWebAppManagementOnMachineGroup@0
   inputs:
